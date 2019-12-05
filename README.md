@@ -1,5 +1,7 @@
 # Sample Raspberry Pi Keypad
 
+> ### [Instructional Video](https://www.youtube.com/watch?v=Cx3d5uxPOOs) 
+
 Contributers:
 - Tinotenda Nyakurerwa
 - Josh Grift
@@ -18,9 +20,6 @@ The circuit used was composed of a Raspberry Pi and 3x4 keypad matrix. The keypa
 
 ## Problem & Challenges
 Our goal was to read in multiple values from the keypad. However, because we had not used the pull-up and pull-down resistors, the value of the keys just kept on randomly changing when only one key had been pressed. We found a tutorial [online](https://crumpspot.blogspot.com/2013/05/using-3x4-matrix-keypad-with-raspberry.html?m=1) and managed to get the keypad from taking in just one key value at a time, to being able to take an infinite number of key values and stopping only if the user presses the "*" or "#" key. This then presented us with a new problem of having the keypad only taking in one key value and printing that infinitely despite other keys being pressed, this issue was fixed by importing the time package and using the sleep() function after the program gets the key press, this then provided the program with ample time to process each key value. We also modified the original code by implementing a try except block, this is to allow the user to escape using the normal command line escape of Ctrl-C in the event that they are unable to stop the program or something unexpected happens and the program does not run as intended.
-
-## Instructional Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Cx3d5uxPOOs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Helpful Links
 - https://crumpspot.blogspot.com/2013/05/using-3x4-matrix-keypad-with-raspberry.html?m=1
