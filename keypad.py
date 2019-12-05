@@ -1,4 +1,3 @@
-
 import RPi.GPIO as GPIO
 import time
 
@@ -13,9 +12,6 @@ class keypad():
 
     ROW         = [26,19,13,6]
     COLUMN      = [22,27,17]
-
-    def __init__(self):
-        GPIO.setmode(GPIO.BCM)
 
     def getKey(self):
         # Set all columns as output low
@@ -36,7 +32,7 @@ class keypad():
                 rowVal = i
 
         # if rowVal is not 0 then no button was pressed and we can exit
-        if rowVal <0 :
+        if rowVal < 0:
             self.exit()
             return
 
@@ -73,30 +69,25 @@ class keypad():
                 GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 if __name__ == '__main__':
+    GPIO.setmode(GPIO.BCM)
+    
     # Initialize the keypad class
     kp = keypad()
     keypadDigits= " "
     # Loop while waiting for a keypress
     digit = None
-    tempdigit = None
-try:
-    while digit == None and digit!= "*" and digit != "#":
-            while len(keypadDigits)<= 3:
-                 digit = kp.getKey()
-                 if digit is not None and digit != "#" and digit != "*":
-                        temp = str(digit)
-                        keypadDigits = keypadDigits + temp
-                        time.sleep(0.5)
-                 if keypadDigits != " " and (digit == "#" or digit == "*"):
-                       digit = int(keypadDigits)
-                       break
-    print(keypadDigits)
-    # Print the result
-    if digit == "#" or digit == "*":
-            print (digit)
-    else:
-            exit(0)
-except KeyboardInterrupt:
-                pass
+    try:
+        while True:
+            digit = kp.getKey()
+            if digit is not None and digit != "#" and digit != "*":
+                keypadDigits = keypadDigits + str(digit)
+                time.sleep(0.5)
+            else:
+                break;
+
+        print(keypadDigits)
+
+    except KeyboardInterrupt:
+        pass
 
 GPIO.cleanup()
